@@ -6,8 +6,8 @@ import Head from 'next/head'
 import {useWallet} from "@solana/wallet-adapter-react";
 
 const Home: NextPage = (props) => {
-    const {publicKey, wallet} = useWallet()
-    const key = publicKey?.toBase58()
+    // const {publicKey, wallet} = useWallet()
+    // const key = publicKey?.toBase58()
 
   return (
     <div className={styles.App}>
@@ -22,6 +22,7 @@ const Home: NextPage = (props) => {
       <div className={styles.AppBody}>
         <p>balance</p>
         <SendSolForm />
+
       </div>
     </div>
   );
