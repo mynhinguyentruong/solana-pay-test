@@ -47,20 +47,25 @@ export const SendSolForm: FC = () => {
     async function getQrCode() {
         fetch('/api/qrcode').then(res => res.json()).then(data => {
             console.log(data)
-            const url = data.url
-            setUrl(url)
+            const {url, testUrl} = data
+            console.log({testUrl})
+            setUrl(testUrl)
         } )
 
     }
 
     useEffect(() => {
-        const qrCode = createQR(url)
-        console.log({qrCode})
-        if (ref.current) {
-            ref.current.innerHTML = ''
+        if (url) {
+            const qrCode = createQR(url)
+            console.log({qrCode})
+            console.log({qrCode})
+            if (ref.current) {
+                ref.current.innerHTML = ''
 
-            qrCode.append(ref.current);
+                qrCode.append(ref.current);
+            }
         }
+
     }, [url])
 
 
@@ -78,7 +83,7 @@ export const SendSolForm: FC = () => {
 
             <p>Or</p>
             <button onClick={getQrCode}>Generate QR Code</button>
-            <div ref={ref}></div>
+            {!ref.current?.innerHTML && <div ref={ref}></div>}
         </div>
     )
 }
