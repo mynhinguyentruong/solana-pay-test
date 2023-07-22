@@ -95,6 +95,9 @@ async function post(req, res) {
         console.log(e)
     }
 
+    console.log({splTransferIx});
+    
+
     let transaction = new Transaction().add(splTransferIx);
 
     let blockhash = (await connection.getLatestBlockhash()).blockhash
@@ -109,11 +112,17 @@ async function post(req, res) {
     //     })
     // );
 
+    console.log({transaction});
+    console.log({transaction});
+    console.log({transaction});
+    
 
     const serializedTransaction = transaction.serialize({
         verifySignatures: false,
         requireAllSignatures: false,
     })
+
+    console.log({serializedTransaction});
 
     const base64Transaction = serializedTransaction.toString('base64');
     const message = 'Thank you for your purchase of ExiledApe #518';
@@ -179,7 +188,11 @@ async function createSplTokenTransferIx(sender: PublicKey, connection: Connectio
     // add references to the instruction
     for (const pubkey of references) {
         splTransferIx.keys.push({ pubkey, isWritable: false, isSigner: false });
+    console.log({pubkey});
+    
     }
+
+    
 
     console.log({splTransferIx})
 
